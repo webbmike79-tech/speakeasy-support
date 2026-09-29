@@ -92,6 +92,15 @@
             font-size: 0.95rem;
             letter-spacing: 0.5px;
         }
+        .chase {
+            background-color: var(--ink);
+            border-bottom: 1px solid #2a2723;
+        }
+        .chase canvas {
+            display: block;
+            width: 100%;
+            height: 96px;
+        }
         .section {
             padding: 60px 20px;
             max-width: 1100px;
@@ -316,6 +325,8 @@
         15+ years IT experience &nbsp;&bull;&nbsp; 30-day workmanship warranty &nbsp;&bull;&nbsp; Response within 2 hours when available
     </div>
 
+    <div class="chase" aria-hidden="true"><canvas id="chaseCanvas"></canvas></div>
+
     <section class="section" id="about">
         <h2>Old-School Service for Modern Tech</h2>
         <p class="intro-text">
@@ -465,5 +476,96 @@
             <p>Remote &amp; in-home IT support &mdash; Stephenville to West Fort Worth, Texas.</p>
         </div>
     </footer>
+    <script>
+    // 8-bit chase: a made man runs down a virus. Pure pixel maps, no image files.
+    (function () {
+        var cv = document.getElementById('chaseCanvas');
+        if (!cv) return;
+        var ctx = cv.getContext('2d');
+        var PX = 5;
+        var PAL = { K:'#0d0c0a', G:'#C9A227', F:'#E8B98A', W:'#FFFFFF', R:'#B03A2E',
+                    D:'#2E2A26', N:'#5A3A22', V:'#58B368', v:'#2F7D44', E:'#FFFFFF', P:'#0d0c0a' };
+        var MAF_A = [
+            "....KKKKKK....",
+            "..KKKKKKKKKK..",
+            "..KGGGGGGGGK..",
+            "....FFFFFF....",
+            "....FKFFKF....",
+            ".....FFFF.....",
+            "...DDDDDDDD...",
+            "..DDDDDDDDDD..",
+            "..DDDWWRWDDD..",
+            "..DDDWWRWDDD..",
+            "..DDDWWRWDDD..",
+            "...DDDDDDDD...",
+            "...DDD..DDD...",
+            "...DDD..DDD...",
+            "..NNN....NNN..",
+            "..NNN....NNN.."
+        ];
+        var MAF_B = [
+            "....KKKKKK....",
+            "..KKKKKKKKKK..",
+            "..KGGGGGGGGK..",
+            "....FFFFFF....",
+            "....FKFFKF....",
+            ".....FFFF.....",
+            "...DDDDDDDD...",
+            "..DDDDDDDDDD..",
+            "..DDDWWRWDDD..",
+            "..DDDWWRWDDD..",
+            "..DDDWWRWDDD..",
+            "...DDDDDDDD...",
+            "....DDDDDD....",
+            "....DDDDDD....",
+            ".....NNN......",
+            "....NNNNN....."
+        ];
+        var VIR = [
+            "..V..VV..V..",
+            "...VVVVVV...",
+            ".VVVVVVVVVV.",
+            "VVVEEVVEEVVV",
+            "VVVEPVVPEVVV",
+            "VVVVEVVEVVVV",
+            ".VVVVVVVVVV.",
+            "..VVVVVVVV..",
+            "...vVVVVv...",
+            "..V..VV..V.."
+        ];
+        function drawSprite(map, ox, oy) {
+            for (var y = 0; y < map.length; y++) {
+                var row = map[y];
+                for (var x = 0; x < row.length; x++) {
+                    var c = row[x];
+                    if (c === '.') continue;
+                    ctx.fillStyle = PAL[c] || '#fff';
+                    ctx.fillRect(ox + x * PX, oy + y * PX, PX, PX);
+                }
+            }
+        }
+        function size() { cv.width = cv.clientWidth; cv.height = 96; }
+        size();
+        window.addEventListener('resize', size);
+        var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var vx = -220, t = 0;
+        function frame() {
+            t++;
+            var W = cv.width, H = cv.height;
+            ctx.clearRect(0, 0, W, H);
+            ctx.fillStyle = 'rgba(201,162,39,0.25)';
+            ctx.fillRect(0, H - 8, W, 2);
+            var groundY = H - 8 - 16 * PX;
+            var virusY = groundY + 30 - Math.abs(Math.sin(t * 0.15)) * 12;
+            var mafY = groundY + Math.round(Math.sin(t * 0.3) * 2);
+            drawSprite(VIR, Math.round(vx), Math.round(virusY));
+            drawSprite(t % 20 < 10 ? MAF_A : MAF_B, Math.round(vx - 150), mafY);
+            vx += 2.4;
+            if (vx - 220 > W) vx = -220;
+            if (!reduced) requestAnimationFrame(frame);
+        }
+        frame();
+    })();
+    </script>
 </body>
 </html>
