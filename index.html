@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakeasy Support | Computer Repair & IT Support — Stephenville to West Fort Worth, TX</title>
+    <meta name="description" content="Remote and in-home tech support from Stephenville to West Fort Worth, TX. Virus removal, Wi-Fi, smart home, and small-business IT — 15+ years experience, 30-day warranty. Book a free consult.">
+    <meta property="og:title" content="Speakeasy Support | Computer Repair & IT Support — Stephenville to West Fort Worth, TX">
+    <meta property="og:description" content="Computer trouble? We make house calls. Remote and in-home tech support with old-school service. Book a free 15-minute consult.">
+    <meta property="og:type" content="website">
+    <style>
+        :root {
+            /* Speakeasy brand: deep charcoal + gold */
+            --ink: #141210;
+            --gold: #C9A227;
+            --gold-light: #E7C65B;
+            --cream: #FAF6EC;
+            --stone: #F1EBDC;
+            --grey-text: #3d3a34;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--grey-text);
+            background-color: #ffffff;
+        }
+        header {
+            background-color: var(--ink);
+            padding: 18px 20px;
+            text-align: center;
+        }
+        .eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+        .hero {
+            background-color: var(--ink);
+            color: #f5f1e6;
+            padding: 70px 20px 80px;
+            text-align: center;
+            border-bottom: 5px solid var(--gold);
+            border-top: 1px solid #2a2723;
+        }
+        .hero h1 {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 2.8rem;
+            margin: 0 0 15px;
+            letter-spacing: 1px;
+            color: #fffdf6;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            margin: 0 auto 32px;
+            font-style: italic;
+            max-width: 780px;
+            color: #cfc8b4;
+            line-height: 1.6;
+        }
+        .btn {
+            background-color: var(--gold);
+            color: var(--ink);
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: background-color 0.3s;
+            margin: 5px;
+        }
+        .btn:hover {
+            background-color: var(--gold-light);
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--gold-light);
+            border: 2px solid var(--gold);
+        }
+        .btn-outline:hover {
+            background-color: rgba(201, 162, 39, 0.15);
+        }
+        .trust-strip {
+            background-color: var(--gold);
+            color: var(--ink);
+            text-align: center;
+            padding: 14px 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+        .section {
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .section h2 {
+            font-family: Georgia, 'Times New Roman', serif;
+            color: var(--ink);
+            text-align: center;
+            margin-bottom: 16px;
+            font-size: 2.2rem;
+            position: relative;
+        }
+        .section h2::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background-color: var(--gold);
+            display: block;
+            margin: 12px auto 0;
+        }
+        .section-sub {
+            text-align: center;
+            font-size: 1.05rem;
+            color: #6b655a;
+            max-width: 750px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+        .intro-text {
+            text-align: center;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            max-width: 850px;
+            margin: 0 auto 40px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: var(--cream);
+            padding: 30px 22px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--gold);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            color: var(--ink);
+            font-size: 1.3rem;
+            margin: 0 0 10px;
+            font-family: Georgia, serif;
+        }
+        .card .price {
+            color: #8a6d1c;
+            font-weight: bold;
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+        }
+        .card p {
+            margin: 0;
+            line-height: 1.6;
+            font-size: 0.98rem;
+        }
+        .price-note {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6b655a;
+            margin-top: 28px;
+            font-style: italic;
+        }
+        .band {
+            background-color: var(--stone);
+        }
+        .band-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            counter-reset: step;
+        }
+        .step {
+            text-align: center;
+            padding: 10px;
+        }
+        .step-num {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: var(--ink);
+            color: var(--gold);
+            font-family: Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            border: 2px solid var(--gold);
+        }
+        .step h3 {
+            color: var(--ink);
+            margin: 0 0 8px;
+            font-size: 1.2rem;
+        }
+        .step p {
+            margin: 0;
+            line-height: 1.6;
+        }
+        .faq-item {
+            background: var(--cream);
+            border-left: 5px solid var(--gold);
+            padding: 20px 25px;
+            margin-bottom: 16px;
+            border-radius: 0 8px 8px 0;
+        }
+        .faq-item h3 {
+            margin: 0 0 8px;
+            color: var(--ink);
+            font-size: 1.1rem;
+        }
+        .faq-item p {
+            margin: 0;
+            line-height: 1.65;
+        }
+        .book-box {
+            background: var(--ink);
+            color: #f5f1e6;
+            border-radius: 10px;
+            padding: 45px 30px;
+            text-align: center;
+            border: 2px solid var(--gold);
+        }
+        .book-box h2 {
+            color: #fffdf6;
+            margin-top: 0;
+        }
+        .book-box h2::after {
+            background-color: var(--gold);
+        }
+        .book-box p {
+            color: #cfc8b4;
+            max-width: 640px;
+            margin: 0 auto 28px;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        footer {
+            background-color: var(--ink);
+            color: #cfc8b4;
+            padding: 45px 20px 20px;
+            margin-top: 0;
+        }
+        .footer-content {
+            text-align: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .contact-info {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 2;
+        }
+        .contact-info strong {
+            color: #fffdf6;
+        }
+        .footer-content a {
+            color: var(--gold-light);
+            text-decoration: none;
+        }
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 35px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            font-size: 0.88rem;
+            color: #8d8674;
+            text-align: center;
+        }
+        .footer-bottom p {
+            margin: 4px 0;
+        }
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <svg width="300" height="64" viewBox="0 0 300 64" role="img" aria-label="Speakeasy Support logo">
+            <rect x="2" y="2" width="60" height="60" rx="8" fill="#C9A227"/>
+            <text x="32" y="43" text-anchor="middle" font-family="Georgia, serif" font-size="30" fill="#141210" font-weight="bold">SS</text>
+            <text x="74" y="30" font-family="Georgia, serif" font-size="23" fill="#FAF6EC" font-weight="bold">Speakeasy Support</text>
+            <text x="74" y="50" font-family="Segoe UI, sans-serif" font-size="11" fill="#C9A227" letter-spacing="2">MILLSAP, TX &bull; REMOTE &amp; IN-HOME IT</text>
+        </svg>
+    </header>
+
+    <section class="hero">
+        <div class="eyebrow">Millsap, Texas &bull; Est. 2026</div>
+        <h1>Computer trouble? We make house calls.</h1>
+        <p>Remote and in-home tech support from Stephenville to West Fort Worth &mdash; computers, Wi-Fi, smart home, and small-business IT, handled by a fella with 15+ years in the trade.</p>
+        <a href="https://calendly.com/spkezspprt/free-15-minute-tech-consult" class="btn">Book a Free Consult</a>
+        <a href="tel:+12395609061" class="btn btn-outline">Call or Text (239) 560-9061</a>
+    </section>
+
+    <div class="trust-strip">
+        15+ years IT experience &nbsp;&bull;&nbsp; 30-day workmanship warranty &nbsp;&bull;&nbsp; Response within 2 hours when available
+    </div>
+
+    <section class="section" id="about">
+        <h2>Old-School Service for Modern Tech</h2>
+        <p class="intro-text">
+            <strong>Speakeasy Support</strong> is run by Mike Webb, an IT systems lead with 15+ years
+            across healthcare, retail, and telecom. No scripts, no call centers, no geek-speak &mdash;
+            just one experienced tech who shows up (or logs in), fixes the problem, and makes sure
+            it stays fixed. Homeowners, families, and small businesses welcome &mdash; including
+            doctor-owned practices that need dependable IT without the enterprise price tag.
+        </p>
+    </section>
+
+    <section class="section band" id="services" style="max-width:100%;">
+        <div class="band-inner">
+            <h2>Services &amp; Starting Prices</h2>
+            <p class="section-sub">Straightforward flat rates for the jobs folks call about most. Hourly and monthly plans available too.</p>
+            <div class="grid">
+                <div class="card">
+                    <h3>Virus &amp; Malware Removal</h3>
+                    <div class="price">from $129</div>
+                    <p>Full cleanup, removal, and hardening so it doesn't come back.</p>
+                </div>
+                <div class="card">
+                    <h3>Computer Cleanup &amp; Tune-Up</h3>
+                    <div class="price">from $99</div>
+                    <p>Slow machine? We trim the fat and get it running like it should.</p>
+                </div>
+                <div class="card">
+                    <h3>Wi-Fi &amp; Network Setup</h3>
+                    <div class="price">from $119</div>
+                    <p>Dead zones, drops, and slow speeds &mdash; diagnosed and fixed.</p>
+                </div>
+                <div class="card">
+                    <h3>Smart Home Setup</h3>
+                    <div class="price">ask for a quote</div>
+                    <p>Cameras, doorbells, thermostats, and voice assistants &mdash; set up right.</p>
+                </div>
+                <div class="card">
+                    <h3>Data Backup Setup</h3>
+                    <div class="price">from $129</div>
+                    <p>Automatic backups for your photos, documents, and business files.</p>
+                </div>
+                <div class="card">
+                    <h3>Printer Setup</h3>
+                    <div class="price">from $79</div>
+                    <p>Wireless printing that actually works, on every device in the house.</p>
+                </div>
+                <div class="card">
+                    <h3>Hardware Upgrades</h3>
+                    <div class="price">from $109 + parts</div>
+                    <p>SSDs, RAM, and components that breathe new life into old machines.</p>
+                </div>
+                <div class="card">
+                    <h3>Email &amp; Software Setup</h3>
+                    <div class="price">from $49</div>
+                    <p>Email, password managers, and everyday software &mdash; configured cleanly.</p>
+                </div>
+                <div class="card">
+                    <h3>Hourly Support</h3>
+                    <div class="price">$65 remote &bull; $85 on-site</div>
+                    <p>For everything else. On-site visits carry a 1-hour minimum.</p>
+                </div>
+            </div>
+            <p class="price-note">Prices are starting points &mdash; every quote is preliminary until Mike confirms final pricing. Monthly care plans available from $49/mo for homes and $199/mo for small business.</p>
+        </div>
+    </section>
+
+    <section class="section" id="how">
+        <h2>How It Works</h2>
+        <p class="section-sub">Three steps, no runaround.</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Book a free consult</h3>
+                <p>Fifteen minutes, no charge. Tell us what's wrong and we'll tell you straight what it'll take.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>We fix it, your way</h3>
+                <p>Remote session from your couch, or an in-home visit &mdash; typical fixes run 30 minutes to a few hours.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>It stays fixed</h3>
+                <p>Every job carries a 30-day workmanship warranty. If it breaks again, we make it right.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section band" id="area" style="max-width:100%;">
+        <div class="band-inner">
+            <h2>Where We Work</h2>
+            <p class="intro-text">
+                <strong>In-home service from Stephenville to West Fort Worth, Texas</strong> &mdash; and
+                remote support anywhere with an internet connection. Travel within 25 miles of Millsap
+                is included; 25&ndash;65 miles adds a flat $35 trip fee. Hours: Monday&ndash;Thursday
+                9:00 AM&ndash;4:30 PM, Friday 9:00 AM&ndash;3:30 PM Central; weekends by appointment.
+            </p>
+        </div>
+    </section>
+
+    <section class="section" id="faq" style="max-width: 800px;">
+        <h2>Fair Questions</h2>
+        <div class="faq-item">
+            <h3>Do I have to bring my computer somewhere?</h3>
+            <p>No. Most jobs are handled remotely or at your home or office &mdash; you don't lift a finger.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How fast can you get to me?</h3>
+            <p>We aim to respond within 2 hours when available. Need it now? Same-day emergency service is available.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What if you can't fix it?</h3>
+            <p>You'll know before we start &mdash; the free consult is honest about what's possible. Finished work carries a 30-day warranty.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Do you work with businesses?</h3>
+            <p>Yes &mdash; small businesses and professional practices, with monthly plans starting at $199/mo for ongoing support.</p>
+        </div>
+        <div class="faq-item">
+            <h3>I'm not very technical. Is that okay?</h3>
+            <p>That's most of our customers. We explain in plain English and never talk down to you.</p>
+        </div>
+    </section>
+
+    <section class="section" id="book" style="max-width: 800px;">
+        <div class="book-box">
+            <div class="eyebrow">No charge &bull; No obligation</div>
+            <h2>Book Your Free 15-Minute Consult</h2>
+            <p>Pick a time that suits you, or just call or text. Prefer typing? Our assistant can take your details anytime.</p>
+            <a href="https://calendly.com/spkezspprt/free-15-minute-tech-consult" class="btn">Pick a Time</a>
+            <a href="https://agent.jotform.com/019b65ca78ca72c8a7dad211972ba58c9c6a" class="btn btn-outline">Chat With Our Assistant</a>
+            <p style="margin: 24px 0 0; font-size: 1.1rem;"><a href="tel:+12395609061" style="color: var(--gold-light); font-weight: bold;">(239) 560-9061</a></p>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="contact-info">
+                <p style="font-size: 1.4rem; margin-bottom: 10px;"><strong>Speakeasy Support</strong></p>
+                <p>&#128205; 5199 S. FM 113, Millsap, TX 76066</p>
+                <p>&#128222; <a href="tel:+12395609061">(239) 560-9061</a> &nbsp;&bull;&nbsp; &#9993; <a href="mailto:spkezspprt@gmail.com">spkezspprt@gmail.com</a></p>
+                <p style="font-size: 0.95rem;">Mon&ndash;Thu 9:00 AM&ndash;4:30 PM &bull; Fri 9:00 AM&ndash;3:30 PM CT &bull; Weekends by appointment</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Speakeasy Support. All rights reserved.</p>
+            <p>Remote &amp; in-home IT support &mdash; Stephenville to West Fort Worth, Texas.</p>
+        </div>
+    </footer>
+</body>
+</html>
