@@ -99,7 +99,9 @@
         .chase canvas {
             display: block;
             width: 100%;
-            height: 96px;
+            height: 120px;
+            cursor: pointer;
+            touch-action: manipulation;
         }
         .section {
             padding: 60px 20px;
@@ -325,7 +327,7 @@
         15+ years IT experience &nbsp;&bull;&nbsp; 30-day workmanship warranty &nbsp;&bull;&nbsp; Response within 2 hours when available
     </div>
 
-    <div class="chase" aria-hidden="true"><canvas id="chaseCanvas"></canvas></div>
+    <div class="chase"><canvas id="chaseCanvas" aria-label="Tap the virus"></canvas></div>
 
     <section class="section" id="about">
         <h2>Old-School Service for Modern Tech</h2>
@@ -477,49 +479,71 @@
         </div>
     </footer>
     <script>
-    // 8-bit chase: a made man runs down a virus. Pure pixel maps, no image files.
+    // 8-bit chase: a made man in the white suit runs down a virus.
+    // Tap the virus and the guy handles the rest. Pure pixel maps, no image files.
     (function () {
         var cv = document.getElementById('chaseCanvas');
         if (!cv) return;
         var ctx = cv.getContext('2d');
         var PX = 5;
         var PAL = { K:'#0d0c0a', G:'#C9A227', F:'#E8B98A', W:'#FFFFFF', R:'#B03A2E',
-                    D:'#2E2A26', N:'#5A3A22', V:'#58B368', v:'#2F7D44', E:'#FFFFFF', P:'#0d0c0a' };
-        var MAF_A = [
-            "....KKKKKK....",
-            "..KKKKKKKKKK..",
-            "..KGGGGGGGGK..",
+                    D:'#2E2A26', N:'#5A3A22', V:'#58B368', v:'#2F7D44', E:'#FFFFFF',
+                    P:'#0d0c0a', X:'#FFD54F' };
+        // Young Vito: white fedora with black band, white suit, black tie
+        var SUIT_A = [
+            "....WWWWWW....",
+            "..WWWWWWWWWW..",
+            "..WKKKKKKKKW..",
             "....FFFFFF....",
             "....FKFFKF....",
             ".....FFFF.....",
-            "...DDDDDDDD...",
-            "..DDDDDDDDDD..",
-            "..DDDWWRWDDD..",
-            "..DDDWWRWDDD..",
-            "..DDDWWRWDDD..",
-            "...DDDDDDDD...",
-            "...DDD..DDD...",
-            "...DDD..DDD...",
-            "..NNN....NNN..",
-            "..NNN....NNN.."
+            "...WWWWWWWW...",
+            "..WWWWWWWWWW..",
+            "..WWWWKKWWWW..",
+            "..WWWWKKWWWW..",
+            "..WWWWKKWWWW..",
+            "...WWWWWWWW...",
+            "...WWW..WWW...",
+            "...WWW..WWW...",
+            "..KKK....KKK..",
+            "..KKK....KKK.."
         ];
-        var MAF_B = [
-            "....KKKKKK....",
-            "..KKKKKKKKKK..",
-            "..KGGGGGGGGK..",
+        var SUIT_B = [
+            "....WWWWWW....",
+            "..WWWWWWWWWW..",
+            "..WKKKKKKKKW..",
             "....FFFFFF....",
             "....FKFFKF....",
             ".....FFFF.....",
-            "...DDDDDDDD...",
-            "..DDDDDDDDDD..",
-            "..DDDWWRWDDD..",
-            "..DDDWWRWDDD..",
-            "..DDDWWRWDDD..",
-            "...DDDDDDDD...",
-            "....DDDDDD....",
-            "....DDDDDD....",
-            ".....NNN......",
-            "....NNNNN....."
+            "...WWWWWWWW...",
+            "..WWWWWWWWWW..",
+            "..WWWWKKWWWW..",
+            "..WWWWKKWWWW..",
+            "..WWWWKKWWWW..",
+            "...WWWWWWWW...",
+            "....WWWWWW....",
+            "....WWWWWW....",
+            ".....KKK......",
+            "....KKKKK....."
+        ];
+        // Punching frame: right arm extended
+        var SUIT_P = [
+            "....WWWWWW....",
+            "..WWWWWWWWWW..",
+            "..WKKKKKKKKW..",
+            "....FFFFFF....",
+            "....FKFFKF....",
+            ".....FFFF.....",
+            "...WWWWWWWW...",
+            "..WWWWWWWWWW..",
+            "..WWWWKKWWWWWF",
+            "..WWWWKKWWWWWF",
+            "..WWWWKKWWWW..",
+            "...WWWWWWWW...",
+            "....WWWWWW....",
+            "....WWWWWW....",
+            ".....KKK......",
+            "....KKKKK....."
         ];
         var VIR = [
             "..V..VV..V..",
@@ -528,6 +552,18 @@
             "VVVEEVVEEVVV",
             "VVVEPVVPEVVV",
             "VVVVEVVEVVVV",
+            ".VVVVVVVVVV.",
+            "..VVVVVVVV..",
+            "...vVVVVv...",
+            "..V..VV..V.."
+        ];
+        var VIR_DIZZY = [
+            "..V..VV..V..",
+            "...VVVVVV...",
+            ".VVVVVVVVVV.",
+            "VVVXXVVXXVVV",
+            "VVVXXXXXXVVV",
+            "VVVVVVVVVVVV",
             ".VVVVVVVVVV.",
             "..VVVVVVVV..",
             "...vVVVVv...",
@@ -544,11 +580,51 @@
                 }
             }
         }
-        function size() { cv.width = cv.clientWidth; cv.height = 96; }
+        function burst(x, y, r, color) {
+            ctx.strokeStyle = color; ctx.lineWidth = 3; ctx.lineCap = 'round';
+            for (var i = 0; i < 8; i++) {
+                var a = i * Math.PI / 4 + 0.4;
+                ctx.beginPath();
+                ctx.moveTo(x + Math.cos(a) * r * 0.35, y + Math.sin(a) * r * 0.35);
+                ctx.lineTo(x + Math.cos(a) * r, y + Math.sin(a) * r);
+                ctx.stroke();
+            }
+        }
+        function bubble(x, y, text) {
+            ctx.font = 'bold 15px "Courier New", monospace';
+            var w = ctx.measureText(text).width + 26, h = 36, r = 9;
+            x = Math.max(6, Math.min(x, cv.width - w - 6));
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.arcTo(x + w, y, x + w, y + h, r);
+            ctx.arcTo(x + w, y + h, x, y + h, r);
+            ctx.arcTo(x, y + h, x, y, r);
+            ctx.arcTo(x, y, x + w, y, r);
+            ctx.closePath();
+            ctx.fillStyle = '#FFFFFF'; ctx.fill();
+            ctx.lineWidth = 3; ctx.strokeStyle = '#0d0c0a'; ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x + 22, y + h - 2); ctx.lineTo(x + 34, y + h + 13); ctx.lineTo(x + 46, y + h - 2);
+            ctx.closePath();
+            ctx.fillStyle = '#FFFFFF'; ctx.fill(); ctx.stroke();
+            ctx.fillStyle = '#0d0c0a';
+            ctx.fillText(text, x + 13, y + 24);
+        }
+        var CH = 120;
+        function size() { cv.width = cv.clientWidth; cv.height = CH; }
         size();
         window.addEventListener('resize', size);
         var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        var vx = -220, t = 0;
+        var state = 'chase';           // chase -> stunned -> beatup -> thanks -> chase
+        var vx = -260, mafX = -410, t = 0, beatT = 0, thanksT = 0, virusY = 0;
+        cv.addEventListener('pointerdown', function (e) {
+            if (reduced || state !== 'chase') return;
+            var r = cv.getBoundingClientRect();
+            var px = (e.clientX - r.left) * (cv.width / r.width);
+            var py = (e.clientY - r.top) * (cv.height / r.height);
+            var bx = vx - 24, by = virusY - 24, bw = 12 * PX + 48, bh = 10 * PX + 48;
+            if (px >= bx && px <= bx + bw && py >= by && py <= by + bh) state = 'stunned';
+        });
         function frame() {
             t++;
             var W = cv.width, H = cv.height;
@@ -556,12 +632,44 @@
             ctx.fillStyle = 'rgba(201,162,39,0.25)';
             ctx.fillRect(0, H - 8, W, 2);
             var groundY = H - 8 - 16 * PX;
-            var virusY = groundY + 30 - Math.abs(Math.sin(t * 0.15)) * 12;
-            var mafY = groundY + Math.round(Math.sin(t * 0.3) * 2);
-            drawSprite(VIR, Math.round(vx), Math.round(virusY));
-            drawSprite(t % 20 < 10 ? MAF_A : MAF_B, Math.round(vx - 150), mafY);
-            vx += 2.4;
-            if (vx - 220 > W) vx = -220;
+            if (state === 'chase') {
+                vx += 2.4;
+                mafX = vx - 150;
+                if (vx - 260 > W) vx = -260;
+                virusY = groundY + 30 - Math.abs(Math.sin(t * 0.15)) * 12;
+                drawSprite(VIR, Math.round(vx), Math.round(virusY));
+                drawSprite(t % 20 < 10 ? SUIT_A : SUIT_B, Math.round(mafX), groundY + Math.round(Math.sin(t * 0.3) * 2));
+            } else if (state === 'stunned') {
+                virusY = groundY + 30;
+                drawSprite(VIR_DIZZY, Math.round(vx), Math.round(virusY));
+                for (var s = 0; s < 3; s++) {
+                    var a = t * 0.12 + s * 2.09;
+                    ctx.fillStyle = '#FFD54F';
+                    ctx.fillRect(Math.round(vx + 30 + Math.cos(a) * 34), Math.round(virusY - 8 + Math.sin(a) * 10), 5, 5);
+                }
+                mafX += 7;
+                drawSprite(t % 12 < 6 ? SUIT_A : SUIT_B, Math.round(mafX), groundY);
+                if (mafX >= vx - 85) { state = 'beatup'; beatT = 0; }
+            } else if (state === 'beatup') {
+                beatT++;
+                virusY = groundY + 30;
+                var jx = (Math.random() * 8 - 4);
+                if (beatT % 6 < 4) drawSprite(VIR_DIZZY, Math.round(vx + jx), Math.round(virusY));
+                drawSprite(beatT % 8 < 4 ? SUIT_P : SUIT_B, Math.round(mafX), groundY);
+                if (beatT % 10 < 5) burst(vx + 8, virusY + 22, 15 + (beatT % 10) * 2, '#FFD54F');
+                if (beatT > 100) { state = 'thanks'; thanksT = 0; }
+            } else if (state === 'thanks') {
+                thanksT++;
+                virusY = groundY + 30;
+                ctx.save();
+                var cx0 = Math.round(vx) + 30, cy0 = Math.round(virusY) + 50;
+                ctx.translate(cx0, cy0); ctx.scale(1, 0.35); ctx.translate(-cx0, -cy0);
+                drawSprite(VIR_DIZZY, Math.round(vx), Math.round(virusY));
+                ctx.restore();
+                drawSprite(SUIT_A, Math.round(mafX), groundY);
+                bubble(Math.round(mafX) + 20, 8, 'Thanks, pal.');
+                if (thanksT > 150) { state = 'chase'; vx = -260; }
+            }
             if (!reduced) requestAnimationFrame(frame);
         }
         frame();
